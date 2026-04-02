@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              04/02/2026 18:29:58 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              04/02/2026 19:31:31 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
@@ -51,8 +51,8 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   1555    ----
-   CONSTANT SIZE    =     10    ----
+   CODE SIZE        =   1587    ----
+   CONSTANT SIZE    =     27    ----
    XDATA SIZE       =    142    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----

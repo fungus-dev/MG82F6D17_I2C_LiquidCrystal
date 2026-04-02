@@ -298,15 +298,11 @@ static void printstr(char *str){
 }
 
 static void clear(){
-//	setCursor(1,1);
-//	printstr("                ");
-//	setCursor(2,1);
-//	printstr("                ");
-//	setCursor(1,1);
-	//sometimes very slow the above method
-		clearCommand();
-	
-	
+	setCursor(1,1);
+	printstr("                ");
+	setCursor(2,1);
+	printstr("                ");
+  home();
 }
 
 
@@ -366,13 +362,13 @@ typedef struct {
 		void (*noAutoscroll)(void);
 		void (*printstr)(char* str);
 		void (*write)(u8 chara);
-		void (*printInt)(u32 n);
+		void (*printInt)(long n);
 		void (*clearCommand)(void);
 
 } I2C_LCD;
 
 const I2C_LCD LCD = {  //acts like a singleton 
-			lcd_init,writeHello,clear,home,setCursor,backlight,noBacklight,displayOn,displayOff,cursor,noCursor,blink,noBlink,leftToRight,rightToLeft,autoscroll,noautoscroll,printstr,write,printInt
+			lcd_init,writeHello,clear,home,setCursor,backlight,noBacklight,displayOn,displayOff,cursor,noCursor,blink,noBlink,leftToRight,rightToLeft,autoscroll,noautoscroll,printstr,write,printInt,clearCommand
 };
 
 

@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    04/02/2026  18:30:04  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    04/02/2026  19:31:31  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
@@ -59,7 +59,7 @@ LINK MAP OF MODULE:  .\Objects\I2C (MAIN)
             CODE    03D7H     0104H     UNIT         ?PR?_PRINTINT?MAIN
             CODE    04DBH     0094H     UNIT         ?PR?_LCD_INIT?MAIN
             CODE    056FH     008CH     UNIT         ?C_C51STARTUP
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  04/02/2026  18:30:04  PAGE 2
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  04/02/2026  19:31:31  PAGE 2
 
 
             CODE    05FBH     0053H     UNIT         ?PR?_SETCURSOR?MAIN
@@ -71,30 +71,30 @@ LINK MAP OF MODULE:  .\Objects\I2C (MAIN)
             CODE    07A5H     0035H     UNIT         ?PR?_PRINTSTR?MAIN
             CODE    07DAH     0031H     UNIT         ?PR?_PCF8574_WRITE?MAIN
             CODE    080BH     0025H     UNIT         ?PR?INITCLOCK?MAIN
-            CODE    0830H     001FH     UNIT         ?PR?_DELAYXUS?MAIN
-            CODE    084FH     001EH     UNIT         ?PR?_PULSEWRITE?MAIN
-            CODE    086DH     001AH     UNIT         ?PR?WRITEHELLO?MAIN
-            CODE    0887H     0019H     UNIT         ?PR?INITTWI0?MAIN
-            CODE    08A0H     0013H     UNIT         ?PR?_WRITE4BIT?MAIN
-            CODE    08B3H     0012H     UNIT         ?PR?_COMMAND?MAIN
-            CODE    08C5H     0012H     UNIT         ?PR?_WRITE?MAIN
-            CODE    08D7H     000FH     UNIT         ?PR?DISPLAYON?MAIN
-            CODE    08E6H     000FH     UNIT         ?PR?DISPLAYOFF?MAIN
-            CODE    08F5H     000FH     UNIT         ?PR?CURSOR?MAIN
-            CODE    0904H     000FH     UNIT         ?PR?NOCURSOR?MAIN
-            CODE    0913H     000FH     UNIT         ?PR?NOBLINK?MAIN
-            CODE    0922H     000FH     UNIT         ?PR?BLINK?MAIN
-            CODE    0931H     000FH     UNIT         ?PR?LEFTTORIGHT?MAIN
-            CODE    0940H     000FH     UNIT         ?PR?RIGHTTOLEFT?MAIN
-            CODE    094FH     000FH     UNIT         ?PR?AUTOSCROLL?MAIN
-            CODE    095EH     000FH     UNIT         ?PR?NOAUTOSCROLL?MAIN
-            CODE    096DH     000DH     UNIT         ?PR?CLEARCOMMAND?MAIN
-            CODE    097AH     000DH     UNIT         ?PR?HOME?MAIN
-            CODE    0987H     000CH     UNIT         ?PR?BACKLIGHT?MAIN
-            CODE    0993H     000AH     UNIT         ?PR?NOBACKLIGHT?MAIN
-            CODE    099DH     000AH     UNIT         ?CO?MAIN
-            CODE    09A7H     0007H     UNIT         ?PR?INITSYSTEM?MAIN
-            CODE    09AEH     0004H     UNIT         ?PR?CLEAR?MAIN
+            CODE    0830H     0024H     UNIT         ?PR?CLEAR?MAIN
+            CODE    0854H     001FH     UNIT         ?PR?_DELAYXUS?MAIN
+            CODE    0873H     001EH     UNIT         ?PR?_PULSEWRITE?MAIN
+            CODE    0891H     001BH     UNIT         ?CO?MAIN
+            CODE    08ACH     001AH     UNIT         ?PR?WRITEHELLO?MAIN
+            CODE    08C6H     0019H     UNIT         ?PR?INITTWI0?MAIN
+            CODE    08DFH     0013H     UNIT         ?PR?_WRITE4BIT?MAIN
+            CODE    08F2H     0012H     UNIT         ?PR?_COMMAND?MAIN
+            CODE    0904H     0012H     UNIT         ?PR?_WRITE?MAIN
+            CODE    0916H     000FH     UNIT         ?PR?DISPLAYON?MAIN
+            CODE    0925H     000FH     UNIT         ?PR?DISPLAYOFF?MAIN
+            CODE    0934H     000FH     UNIT         ?PR?CURSOR?MAIN
+            CODE    0943H     000FH     UNIT         ?PR?NOCURSOR?MAIN
+            CODE    0952H     000FH     UNIT         ?PR?NOBLINK?MAIN
+            CODE    0961H     000FH     UNIT         ?PR?BLINK?MAIN
+            CODE    0970H     000FH     UNIT         ?PR?LEFTTORIGHT?MAIN
+            CODE    097FH     000FH     UNIT         ?PR?RIGHTTOLEFT?MAIN
+            CODE    098EH     000FH     UNIT         ?PR?AUTOSCROLL?MAIN
+            CODE    099DH     000FH     UNIT         ?PR?NOAUTOSCROLL?MAIN
+            CODE    09ACH     000DH     UNIT         ?PR?CLEARCOMMAND?MAIN
+            CODE    09B9H     000DH     UNIT         ?PR?HOME?MAIN
+            CODE    09C6H     000CH     UNIT         ?PR?BACKLIGHT?MAIN
+            CODE    09D2H     000AH     UNIT         ?PR?NOBACKLIGHT?MAIN
+            CODE    09DCH     0007H     UNIT         ?PR?INITSYSTEM?MAIN
 
 
 
@@ -119,7 +119,7 @@ SEGMENT
 ?PR?INITCLOCK?MAIN
   +--> ?PR?_DELAYXUS?MAIN
 
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  04/02/2026  18:30:04  PAGE 3
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  04/02/2026  19:31:31  PAGE 3
 
 
 ?C_INITSEG
@@ -143,6 +143,7 @@ SEGMENT
   +--> ?PR?_PRINTSTR?MAIN
   +--> ?PR?_WRITE?MAIN
   +--> ?PR?_PRINTINT?MAIN
+  +--> ?PR?CLEARCOMMAND?MAIN
 
 ?PR?_LCD_INIT?MAIN
   +--> ?PR?_PCF8574_WRITE?MAIN
@@ -178,24 +179,26 @@ SEGMENT
 ?PR?_WRITE?MAIN
   +--> ?PR?_SEND?MAIN
   +--> ?PR?_DELAYXUS?MAIN
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  04/02/2026  19:31:31  PAGE 4
 
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  04/02/2026  18:30:04  PAGE 4
 
 
 ?PR?CLEAR?MAIN
-  +--> ?PR?CLEARCOMMAND?MAIN
-
-?PR?CLEARCOMMAND?MAIN
-  +--> ?PR?_COMMAND?MAIN
-  +--> ?PR?_DELAYXMS?MAIN
-
-?PR?HOME?MAIN
-  +--> ?PR?_COMMAND?MAIN
-  +--> ?PR?_DELAYXMS?MAIN
+  +--> ?PR?_SETCURSOR?MAIN
+  +--> ?CO?MAIN
+  +--> ?PR?_PRINTSTR?MAIN
+  +--> ?PR?HOME?MAIN
 
 ?PR?_SETCURSOR?MAIN
   +--> ?CO?MAIN
   +--> ?PR?_COMMAND?MAIN
+
+?PR?_PRINTSTR?MAIN
+  +--> ?PR?_WRITE?MAIN
+
+?PR?HOME?MAIN
+  +--> ?PR?_COMMAND?MAIN
+  +--> ?PR?_DELAYXMS?MAIN
 
 ?PR?BACKLIGHT?MAIN
   +--> ?PR?_PCF8574_WRITE?MAIN
@@ -233,15 +236,16 @@ SEGMENT
 ?PR?NOAUTOSCROLL?MAIN
   +--> ?PR?_COMMAND?MAIN
 
-?PR?_PRINTSTR?MAIN
-  +--> ?PR?_WRITE?MAIN
-
 ?PR?_PRINTINT?MAIN
   +--> ?PR?_WRITE?MAIN
   +--> ?PR?_PRINTSTR?MAIN
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  04/02/2026  18:30:04  PAGE 5
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  04/02/2026  19:31:31  PAGE 5
 
 
+
+?PR?CLEARCOMMAND?MAIN
+  +--> ?PR?_COMMAND?MAIN
+  +--> ?PR?_DELAYXMS?MAIN
 
 
 
@@ -261,60 +265,60 @@ SYMBOL TABLE OF MODULE:  .\Objects\I2C (MAIN)
   C:080BH         PUBLIC        InitClock
   D:00F8H         PUBLIC        P6
   D:00E1H         PUBLIC        WDTCR
-  C:09AEH         SYMBOL        clear
+  C:0830H         SYMBOL        clear
   C:07A5H         SYMBOL        _printstr
   D:00A8H         PUBLIC        IE
-  C:0922H         SYMBOL        blink
+  C:0961H         SYMBOL        blink
   D:00B8H         PUBLIC        IP0L
-  C:08E6H         SYMBOL        displayOff
+  C:0925H         SYMBOL        displayOff
   D:00C7H         PUBLIC        CKCON0
-  C:08F5H         SYMBOL        cursor
+  C:0934H         SYMBOL        cursor
   C:07DAH         SYMBOL        _PCF8574_Write
-  C:08A0H         SYMBOL        _write4bit
+  C:08DFH         SYMBOL        _write4bit
   D:00D8H         PUBLIC        CCON
-  C:086DH         SYMBOL        writeHello
+  C:08ACH         SYMBOL        writeHello
   C:064EH         PUBLIC        main
   D:00E6H         PUBLIC        SCMD
-  C:097AH         SYMBOL        home
+  C:09B9H         SYMBOL        home
   C:0724H         SYMBOL        _send
   C:0765H         PUBLIC        _DelayXms
-  C:095EH         SYMBOL        noautoscroll
-  C:08C5H         SYMBOL        _write
-  C:0987H         SYMBOL        backlight
+  C:099DH         SYMBOL        noautoscroll
+  C:0904H         SYMBOL        _write
+  C:09C6H         SYMBOL        backlight
   D:00E3H         PUBLIC        IFADRH
   D:00E5H         PUBLIC        IFMT
   C:0281H         PUBLIC        _TWI0_WriteBuf
   X:0000H         SYMBOL        lcd
-  C:0830H         PUBLIC        _DelayXus
+  C:0854H         PUBLIC        _DelayXus
   D:00E4H         PUBLIC        IFADRL
   D:0088H         PUBLIC        TCON
-  C:08D7H         SYMBOL        displayOn
-  C:084FH         SYMBOL        _pulseWrite
-  C:0887H         PUBLIC        InitTWI0
-  C:09A7H         PUBLIC        initSystem
-  C:09A3H         SYMBOL        _?ix1000
+  C:0916H         SYMBOL        displayOn
+  C:0873H         SYMBOL        _pulseWrite
+  C:08C6H         PUBLIC        InitTWI0
+  C:09DCH         PUBLIC        initSystem
+  C:08A8H         SYMBOL        _?ix1000
   C:04DBH         SYMBOL        _lcd_init
-  C:096DH         SYMBOL        clearCommand
-  C:094FH         SYMBOL        autoscroll
+  C:09ACH         SYMBOL        clearCommand
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  04/02/2026  19:31:31  PAGE 6
+
+
+  C:098EH         SYMBOL        autoscroll
   C:05FBH         SYMBOL        _setCursor
-  C:0913H         SYMBOL        noBlink
+  C:0952H         SYMBOL        noBlink
   X:0005H         PUBLIC        LCD
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  04/02/2026  18:30:04  PAGE 6
-
-
   D:00E2H         PUBLIC        IFD
   C:03D7H         SYMBOL        _printInt
-  C:0904H         SYMBOL        noCursor
-  C:08B3H         SYMBOL        _command
+  C:0943H         SYMBOL        noCursor
+  C:08F2H         SYMBOL        _command
   D:0098H         PUBLIC        S0CON
   D:0098H         PUBLIC        S1CON
   D:00C8H         PUBLIC        T2CON
   D:00C8H         PUBLIC        T3CON
   D:00C8H         PUBLIC        T5CON
   D:00C8H         PUBLIC        T6CON
-  C:0993H         SYMBOL        noBacklight
-  C:0940H         SYMBOL        rightToLeft
-  C:0931H         SYMBOL        leftToRight
+  C:09D2H         SYMBOL        noBacklight
+  C:097FH         SYMBOL        rightToLeft
+  C:0970H         SYMBOL        leftToRight
   D:00A4H         PUBLIC        AUXR3
   D:00D2H         PUBLIC        SIDAT
   D:00D0H         PUBLIC        PSW
@@ -322,27 +326,27 @@ SYMBOL TABLE OF MODULE:  .\Objects\I2C (MAIN)
   D:00D4H         PUBLIC        SICON
   -------         PROC          _DELAYXUS
   X:0088H         SYMBOL        xUs
-  C:0830H         LINE#         18
-  C:0835H         LINE#         19
-  C:0835H         LINE#         20
-  C:083CH         LINE#         21
-  C:083CH         LINE#         23
-  C:083DH         LINE#         26
-  C:083EH         LINE#         27
-  C:083FH         LINE#         28
-  C:0840H         LINE#         29
-  C:0841H         LINE#         32
-  C:0842H         LINE#         36
-  C:0843H         LINE#         37
-  C:0844H         LINE#         38
-  C:0845H         LINE#         39
-  C:0846H         LINE#         40
-  C:0847H         LINE#         41
-  C:0848H         LINE#         44
-  C:0849H         LINE#         45
-  C:084AH         LINE#         60
-  C:084CH         LINE#         61
-  C:084EH         LINE#         62
+  C:0854H         LINE#         18
+  C:0859H         LINE#         19
+  C:0859H         LINE#         20
+  C:0860H         LINE#         21
+  C:0860H         LINE#         23
+  C:0861H         LINE#         26
+  C:0862H         LINE#         27
+  C:0863H         LINE#         28
+  C:0864H         LINE#         29
+  C:0865H         LINE#         32
+  C:0866H         LINE#         36
+  C:0867H         LINE#         37
+  C:0868H         LINE#         38
+  C:0869H         LINE#         39
+  C:086AH         LINE#         40
+  C:086BH         LINE#         41
+  C:086CH         LINE#         44
+  C:086DH         LINE#         45
+  C:086EH         LINE#         60
+  C:0870H         LINE#         61
+  C:0872H         LINE#         62
   -------         ENDPROC       _DELAYXUS
   -------         PROC          _DELAYXMS
   X:0084H         SYMBOL        xMs
@@ -355,13 +359,13 @@ SYMBOL TABLE OF MODULE:  .\Objects\I2C (MAIN)
   C:0780H         LINE#         76
   C:0785H         LINE#         77
   C:078AH         LINE#         78
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  04/02/2026  19:31:31  PAGE 7
+
+
   C:078FH         LINE#         79
   C:0794H         LINE#         80
   C:07A2H         LINE#         82
   C:07A4H         LINE#         83
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  04/02/2026  18:30:04  PAGE 7
-
-
   -------         ENDPROC       _DELAYXMS
   -------         PROC          INITCLOCK
   C:080BH         LINE#         6
@@ -415,13 +419,13 @@ SYMBOL TABLE OF MODULE:  .\Objects\I2C (MAIN)
   C:0367H         LINE#         122
   C:0367H         LINE#         123
   C:036AH         LINE#         124
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  04/02/2026  19:31:31  PAGE 8
+
+
   C:036AH         LINE#         125
   C:0385H         LINE#         126
   C:038BH         LINE#         127
   C:038EH         LINE#         128
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  04/02/2026  18:30:04  PAGE 8
-
-
   C:039EH         LINE#         129
   C:03A4H         LINE#         130
   C:03A6H         LINE#         132
@@ -447,18 +451,18 @@ SYMBOL TABLE OF MODULE:  .\Objects\I2C (MAIN)
   -------         ENDPROC       _PCF8574_WRITE
   -------         PROC          _PULSEWRITE
   X:008AH         SYMBOL        dataC
-  C:084FH         LINE#         159
-  C:0854H         LINE#         160
-  C:085CH         LINE#         161
-  C:0861H         LINE#         162
-  C:086CH         LINE#         163
+  C:0873H         LINE#         159
+  C:0878H         LINE#         160
+  C:0880H         LINE#         161
+  C:0885H         LINE#         162
+  C:0890H         LINE#         163
   -------         ENDPROC       _PULSEWRITE
   -------         PROC          _WRITE4BIT
   X:008BH         SYMBOL        dataC
-  C:08A0H         LINE#         165
-  C:08A5H         LINE#         166
-  C:08AAH         LINE#         167
-  C:08B2H         LINE#         168
+  C:08DFH         LINE#         165
+  C:08E4H         LINE#         166
+  C:08E9H         LINE#         167
+  C:08F1H         LINE#         168
   -------         ENDPROC       _WRITE4BIT
   -------         PROC          _SEND
   X:007DH         SYMBOL        dataC
@@ -475,21 +479,21 @@ SYMBOL TABLE OF MODULE:  .\Objects\I2C (MAIN)
   C:0764H         LINE#         177
   -------         ENDPROC       _SEND
   -------         PROC          _COMMAND
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  04/02/2026  19:31:31  PAGE 9
+
+
   X:008CH         SYMBOL        dataC
-  C:08B3H         LINE#         179
-  C:08B8H         LINE#         180
-  C:08BFH         LINE#         181
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  04/02/2026  18:30:04  PAGE 9
-
-
-  C:08C4H         LINE#         182
+  C:08F2H         LINE#         179
+  C:08F7H         LINE#         180
+  C:08FEH         LINE#         181
+  C:0903H         LINE#         182
   -------         ENDPROC       _COMMAND
   -------         PROC          _WRITE
   X:008DH         SYMBOL        dataC
-  C:08C5H         LINE#         183
-  C:08CAH         LINE#         184
-  C:08D1H         LINE#         185
-  C:08D6H         LINE#         186
+  C:0904H         LINE#         183
+  C:0909H         LINE#         184
+  C:0910H         LINE#         185
+  C:0915H         LINE#         186
   -------         ENDPROC       _WRITE
   -------         PROC          _LCD_INIT
   X:0086H         SYMBOL        addr
@@ -517,31 +521,31 @@ SYMBOL TABLE OF MODULE:  .\Objects\I2C (MAIN)
   C:056EH         LINE#         218
   -------         ENDPROC       _LCD_INIT
   -------         PROC          WRITEHELLO
-  C:086DH         LINE#         219
-  C:086DH         LINE#         220
-  C:0872H         LINE#         221
-  C:0877H         LINE#         222
-  C:087CH         LINE#         223
-  C:0881H         LINE#         224
-  C:0886H         LINE#         225
+  C:08ACH         LINE#         219
+  C:08ACH         LINE#         220
+  C:08B1H         LINE#         221
+  C:08B6H         LINE#         222
+  C:08BBH         LINE#         223
+  C:08C0H         LINE#         224
+  C:08C5H         LINE#         225
   -------         ENDPROC       WRITEHELLO
   -------         PROC          CLEARCOMMAND
-  C:096DH         LINE#         230
-  C:096DH         LINE#         231
-  C:0972H         LINE#         232
-  C:0979H         LINE#         233
+  C:09ACH         LINE#         230
+  C:09ACH         LINE#         231
+  C:09B1H         LINE#         232
+  C:09B8H         LINE#         233
   -------         ENDPROC       CLEARCOMMAND
   -------         PROC          HOME
-  C:097AH         LINE#         235
-  C:097AH         LINE#         236
-  C:097FH         LINE#         237
-  C:0986H         LINE#         238
+  C:09B9H         LINE#         235
+  C:09B9H         LINE#         236
+  C:09BEH         LINE#         237
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  04/02/2026  19:31:31  PAGE 10
+
+
+  C:09C5H         LINE#         238
   -------         ENDPROC       HOME
   -------         PROC          _SETCURSOR
   X:0077H         SYMBOL        row
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  04/02/2026  18:30:04  PAGE 10
-
-
   X:0078H         SYMBOL        col
   -------         DO            
   X:0079H         SYMBOL        rowoff
@@ -552,79 +556,79 @@ SYMBOL TABLE OF MODULE:  .\Objects\I2C (MAIN)
   C:064DH         LINE#         242
   -------         ENDPROC       _SETCURSOR
   -------         PROC          BACKLIGHT
-  C:0987H         LINE#         243
-  C:0987H         LINE#         244
-  C:098DH         LINE#         245
-  C:0992H         LINE#         246
+  C:09C6H         LINE#         243
+  C:09C6H         LINE#         244
+  C:09CCH         LINE#         245
+  C:09D1H         LINE#         246
   -------         ENDPROC       BACKLIGHT
   -------         PROC          NOBACKLIGHT
-  C:0993H         LINE#         247
-  C:0993H         LINE#         248
-  C:0998H         LINE#         249
-  C:099CH         LINE#         250
+  C:09D2H         LINE#         247
+  C:09D2H         LINE#         248
+  C:09D7H         LINE#         249
+  C:09DBH         LINE#         250
   -------         ENDPROC       NOBACKLIGHT
   -------         PROC          DISPLAYON
-  C:08D7H         LINE#         251
-  C:08D7H         LINE#         252
-  C:08E0H         LINE#         253
-  C:08E5H         LINE#         254
+  C:0916H         LINE#         251
+  C:0916H         LINE#         252
+  C:091FH         LINE#         253
+  C:0924H         LINE#         254
   -------         ENDPROC       DISPLAYON
   -------         PROC          DISPLAYOFF
-  C:08E6H         LINE#         255
-  C:08E6H         LINE#         256
-  C:08EFH         LINE#         257
-  C:08F4H         LINE#         258
+  C:0925H         LINE#         255
+  C:0925H         LINE#         256
+  C:092EH         LINE#         257
+  C:0933H         LINE#         258
   -------         ENDPROC       DISPLAYOFF
   -------         PROC          CURSOR
-  C:08F5H         LINE#         259
-  C:08F5H         LINE#         260
-  C:08FEH         LINE#         261
-  C:0903H         LINE#         262
+  C:0934H         LINE#         259
+  C:0934H         LINE#         260
+  C:093DH         LINE#         261
+  C:0942H         LINE#         262
   -------         ENDPROC       CURSOR
   -------         PROC          NOCURSOR
-  C:0904H         LINE#         263
-  C:0904H         LINE#         264
-  C:090DH         LINE#         265
-  C:0912H         LINE#         266
+  C:0943H         LINE#         263
+  C:0943H         LINE#         264
+  C:094CH         LINE#         265
+  C:0951H         LINE#         266
   -------         ENDPROC       NOCURSOR
   -------         PROC          NOBLINK
-  C:0913H         LINE#         267
-  C:0913H         LINE#         268
-  C:091CH         LINE#         269
-  C:0921H         LINE#         270
+  C:0952H         LINE#         267
+  C:0952H         LINE#         268
+  C:095BH         LINE#         269
+  C:0960H         LINE#         270
   -------         ENDPROC       NOBLINK
   -------         PROC          BLINK
-  C:0922H         LINE#         271
-  C:0922H         LINE#         272
-  C:092BH         LINE#         273
-  C:0930H         LINE#         274
+  C:0961H         LINE#         271
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  04/02/2026  19:31:31  PAGE 11
+
+
+  C:0961H         LINE#         272
+  C:096AH         LINE#         273
+  C:096FH         LINE#         274
   -------         ENDPROC       BLINK
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  04/02/2026  18:30:04  PAGE 11
-
-
   -------         PROC          LEFTTORIGHT
-  C:0931H         LINE#         275
-  C:0931H         LINE#         276
-  C:093AH         LINE#         277
-  C:093FH         LINE#         278
+  C:0970H         LINE#         275
+  C:0970H         LINE#         276
+  C:0979H         LINE#         277
+  C:097EH         LINE#         278
   -------         ENDPROC       LEFTTORIGHT
   -------         PROC          RIGHTTOLEFT
-  C:0940H         LINE#         279
-  C:0940H         LINE#         280
-  C:0949H         LINE#         281
-  C:094EH         LINE#         282
+  C:097FH         LINE#         279
+  C:097FH         LINE#         280
+  C:0988H         LINE#         281
+  C:098DH         LINE#         282
   -------         ENDPROC       RIGHTTOLEFT
   -------         PROC          AUTOSCROLL
-  C:094FH         LINE#         283
-  C:094FH         LINE#         284
-  C:0958H         LINE#         285
-  C:095DH         LINE#         286
+  C:098EH         LINE#         283
+  C:098EH         LINE#         284
+  C:0997H         LINE#         285
+  C:099CH         LINE#         286
   -------         ENDPROC       AUTOSCROLL
   -------         PROC          NOAUTOSCROLL
-  C:095EH         LINE#         287
-  C:095EH         LINE#         288
-  C:0967H         LINE#         289
-  C:096CH         LINE#         290
+  C:099DH         LINE#         287
+  C:099DH         LINE#         288
+  C:09A6H         LINE#         289
+  C:09ABH         LINE#         290
   -------         ENDPROC       NOAUTOSCROLL
   -------         PROC          _PRINTSTR
   X:0081H         SYMBOL        str
@@ -635,9 +639,13 @@ SYMBOL TABLE OF MODULE:  .\Objects\I2C (MAIN)
   C:07D9H         LINE#         298
   -------         ENDPROC       _PRINTSTR
   -------         PROC          CLEAR
-  C:09AEH         LINE#         300
-  C:09AEH         LINE#         307
-  C:09B1H         LINE#         310
+  C:0830H         LINE#         300
+  C:0830H         LINE#         301
+  C:0837H         LINE#         302
+  C:0840H         LINE#         303
+  C:0847H         LINE#         304
+  C:0850H         LINE#         305
+  C:0853H         LINE#         306
   -------         ENDPROC       CLEAR
   -------         PROC          _PRINTINT
   X:0045H         SYMBOL        n
@@ -648,38 +656,38 @@ SYMBOL TABLE OF MODULE:  .\Objects\I2C (MAIN)
   X:006DH         SYMBOL        c
   -------         ENDDO         
   -------         ENDDO         
-  C:03D7H         LINE#         313
-  C:03DDH         LINE#         331
-  C:03EEH         LINE#         332
-  C:0410H         LINE#         333
-  C:042CH         LINE#         334
-  C:0431H         LINE#         335
-  C:0448H         LINE#         336
-  C:0448H         LINE#         337
-  C:0457H         LINE#         338
-  C:0457H         LINE#         339
-  C:047DH         LINE#         340
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  04/02/2026  18:30:04  PAGE 12
+  C:03D7H         LINE#         309
+  C:03DDH         LINE#         327
+  C:03EEH         LINE#         328
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  04/02/2026  19:31:31  PAGE 12
 
 
-  C:049CH         LINE#         341
-  C:04B8H         LINE#         342
-  C:04CCH         LINE#         343
-  C:04DAH         LINE#         345
+  C:0410H         LINE#         329
+  C:042CH         LINE#         330
+  C:0431H         LINE#         331
+  C:0448H         LINE#         332
+  C:0448H         LINE#         333
+  C:0457H         LINE#         334
+  C:0457H         LINE#         335
+  C:047DH         LINE#         336
+  C:049CH         LINE#         337
+  C:04B8H         LINE#         338
+  C:04CCH         LINE#         339
+  C:04DAH         LINE#         341
   -------         ENDPROC       _PRINTINT
   -------         PROC          INITTWI0
-  C:0887H         LINE#         18
-  C:0887H         LINE#         19
-  C:088AH         LINE#         20
-  C:0893H         LINE#         21
-  C:089CH         LINE#         22
-  C:089FH         LINE#         23
+  C:08C6H         LINE#         18
+  C:08C6H         LINE#         19
+  C:08C9H         LINE#         20
+  C:08D2H         LINE#         21
+  C:08DBH         LINE#         22
+  C:08DEH         LINE#         23
   -------         ENDPROC       INITTWI0
   -------         PROC          INITSYSTEM
-  C:09A7H         LINE#         25
-  C:09A7H         LINE#         26
-  C:09AAH         LINE#         27
-  C:09ADH         LINE#         28
+  C:09DCH         LINE#         25
+  C:09DCH         LINE#         26
+  C:09DFH         LINE#         27
+  C:09E2H         LINE#         28
   -------         ENDPROC       INITSYSTEM
   -------         PROC          MAIN
   C:064EH         LINE#         30
@@ -711,6 +719,9 @@ SYMBOL TABLE OF MODULE:  .\Objects\I2C (MAIN)
   -------         MODULE        ?C?IILDX
   C:0151H         PUBLIC        ?C?IILDX
   -------         ENDMOD        ?C?IILDX
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  04/02/2026  19:31:31  PAGE 13
+
+
 
   -------         MODULE        ?C?ILDIX
   C:0167H         PUBLIC        ?C?ILDIX
@@ -719,9 +730,6 @@ SYMBOL TABLE OF MODULE:  .\Objects\I2C (MAIN)
   -------         MODULE        ?C?SLDIV
   C:06E0H         PUBLIC        ?C?SLDIV
   -------         ENDMOD        ?C?SLDIV
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  04/02/2026  18:30:04  PAGE 13
-
-
 
   -------         MODULE        ?C?LNEG
   C:017DH         PUBLIC        ?C?LNEG
@@ -744,5 +752,5 @@ SYMBOL TABLE OF MODULE:  .\Objects\I2C (MAIN)
   C:01EFH         PUBLIC        ?C?ULDIV
   -------         ENDMOD        ?C?ULDIV
 
-Program Size: data=9.0 xdata=142 code=2482
+Program Size: data=9.0 xdata=142 code=2531
 LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
