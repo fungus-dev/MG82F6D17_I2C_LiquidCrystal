@@ -1,0 +1,394 @@
+C51 COMPILER V9.60.7.0   LCD_I2C                                                           04/02/2026 17:27:47 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE LCD_I2C
+OBJECT MODULE PLACED IN .\Objects\LCD_I2C.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE include\LCD_I2C.c LARGE OPTIMIZE(0,SPEED) BROWSE DEBUG OBJECTEXTEND PRIN
+                    -T(.\Listings\LCD_I2C.lst) TABS(2) OBJECT(.\Objects\LCD_I2C.obj)
+
+line level    source
+
+   1          #include "REG_MG82F6D17.H"
+   2          #include "TYPE.h"
+   3          #include "Delay.h"
+*** ERROR C320 IN LINE 87 OF include\Delay.h: "MCU_CPUCLK" MISSING
+   4          
+   5          
+   6          
+   7          // TO DO: FIX AND SYNC ALL DELAYS
+   8          
+   9          
+  10          //https://github.com/fdebrabander/Arduino-LiquidCrystal-I2C-library/blob/master/LiquidCrystal_I2C.h
+  11          
+  12          // commands
+  13          #define LCD_CLEARDISPLAY 0x01
+  14          #define LCD_RETURNHOME 0x02
+  15          #define LCD_ENTRYMODESET 0x04
+  16          #define LCD_DISPLAYCONTROL 0x08
+  17          #define LCD_CURSORSHIFT 0x10
+  18          #define LCD_FUNCTIONSET 0x20
+  19          #define LCD_SETCGRAMADDR 0x40
+  20          #define LCD_SETDDRAMADDR 0x80
+  21          
+  22          // flags for display entry mode
+  23          #define LCD_ENTRYRIGHT 0x00
+  24          #define LCD_ENTRYLEFT 0x02
+  25          #define LCD_ENTRYSHIFTINCREMENT 0x01
+  26          #define LCD_ENTRYSHIFTDECREMENT 0x00
+  27          
+  28          // flags for display on/off control
+  29          #define LCD_DISPLAYON 0x04
+  30          #define LCD_DISPLAYOFF 0x00
+  31          #define LCD_CURSORON 0x02
+  32          #define LCD_CURSOROFF 0x00
+  33          #define LCD_BLINKON 0x01
+  34          #define LCD_BLINKOFF 0x00
+  35          
+  36          // flags for display/cursor shift
+  37          #define LCD_DISPLAYMOVE 0x08
+  38          #define LCD_CURSORMOVE 0x00
+  39          #define LCD_MOVERIGHT 0x04
+  40          #define LCD_MOVELEFT 0x00
+  41          
+  42          // flags for function set
+  43          #define LCD_8BITMODE 0x10
+  44          #define LCD_4BITMODE 0x00
+  45          #define LCD_2LINE 0x08
+  46          #define LCD_1LINE 0x00
+  47          #define LCD_5x10DOTS 0x04
+  48          #define LCD_5x8DOTS 0x00
+  49          
+  50          // flags for backlight control
+  51          #define LCD_BACKLIGHT 0x08
+  52          #define LCD_NOBACKLIGHT 0x00
+  53          
+C51 COMPILER V9.60.7.0   LCD_I2C                                                           04/02/2026 17:27:47 PAGE 2   
+
+  54          #define LCD_BACKLIGHT    0x08
+  55          #define LCD_ENABLE       0x04
+  56          #define LCD_RW           0x00
+  57          #define LCD_RS           0x01 
+  58          
+  59          u8  TWI0OvTime;
+  60          
+  61          typedef struct{
+  62            u8 _backlight;
+  63            u8 _addr;
+  64            u8 _displayctrl;
+  65            u8 _displaymode;
+  66          } LCD_options;
+  67          
+  68          static LCD_options lcd;
+  69          
+  70          
+  71            
+  72          
+  73          
+  74          u8 TWI0_WriteBuf(u8 DevAddr,u16 RegStartAddr,u8 *pBuf,u8 Len){
+  75   1        u8 i;
+  76   1        u8 Flag;
+  77   1        Flag=1;
+  78   1      
+  79   1        SICON |=STA;            // Send START
+  80   1        TWI0OvTime=5;
+  81   1        SICON &=~SI;      
+  82   1        while((SICON&SI)!=SI){if(TWI0OvTime==0) goto TWI0_WRITE_ERR;}   // wait completed, if time overflow,then r
+             -eturn fail.
+  83   1        SICON &=~STA;
+  84   1      
+  85   1        SICON=SICON|(AA);    
+  86   1      
+  87   1        Flag++;
+  88   1        SIDAT = DevAddr&0xFE;       // send Slave Device address  
+  89   1        TWI0OvTime=5;
+  90   1        SICON &=~SI;      
+  91   1        while((SICON&SI)!=SI){if(TWI0OvTime==0) goto TWI0_WRITE_ERR;}   // wait completed, if time overflow,then r
+             -eturn fail.
+  92   1      
+  93   1        Flag++;
+  94   1        SIDAT = HIBYTE(RegStartAddr);   // send Slave Data address high
+  95   1        TWI0OvTime=5;
+  96   1        SICON &=~SI;      
+  97   1        while((SICON&SI)!=SI){if(TWI0OvTime==0) goto TWI0_WRITE_ERR;}   // wait completed, if time overflow,then r
+             -eturn fail.
+  98   1      
+  99   1        Flag++;
+ 100   1        SIDAT = LOBYTE(RegStartAddr);   // send Slave Data address low
+ 101   1        TWI0OvTime=5;
+ 102   1        SICON &=~SI;      
+ 103   1        while((SICON&SI)!=SI){if(TWI0OvTime==0) goto TWI0_WRITE_ERR;}   // wait completed, if time overflow,then r
+             -eturn fail.
+ 104   1      
+ 105   1      
+ 106   1        Flag++;
+ 107   1        i=0;
+ 108   1        while(i<Len)
+ 109   1        {
+ 110   2          if(i==(Len-1))
+ 111   2          {
+C51 COMPILER V9.60.7.0   LCD_I2C                                                           04/02/2026 17:27:47 PAGE 3   
+
+ 112   3            SICON=SICON&(~AA);     
+ 113   3          }
+ 114   2          else
+ 115   2          {
+ 116   3            SICON=SICON|(AA);    
+ 117   3          }
+ 118   2          SIDAT=pBuf[i];      // send  Data 
+ 119   2          TWI0OvTime=5;
+ 120   2          SICON &=~SI;      
+ 121   2          while((SICON&SI)!=SI){if(TWI0OvTime==0) goto TWI0_WRITE_ERR;}   // wait completed, if time overflow,then 
+             -return fail.
+ 122   2          i++;
+ 123   2        }
+ 124   1                
+ 125   1        Flag++;
+ 126   1        SICON |= STO;       // Send STOP
+ 127   1        TWI0OvTime=5;
+ 128   1        SICON &=~SI;      
+ 129   1        while((SICON&STO)==STO){if(TWI0OvTime==0) goto TWI0_WRITE_ERR;}   // wait completed, if time overflow,then
+             - return fail.
+ 130   1        SICON &=~STO;
+ 131   1      
+ 132   1        SICON = SICON &(~SI);   
+ 133   1      
+ 134   1        return 0;
+ 135   1        
+ 136   1      TWI0_WRITE_ERR:
+ 137   1        return Flag;
+ 138   1      }
+ 139          
+ 140          
+ 141          
+ 142          static void PCF8574_Write(u8 dataC) {
+ 143   1        dataC |= lcd._backlight;
+ 144   1            TWI0_WriteBuf(lcd._addr, 0x0000, &dataC, 1);
+ 145   1      }
+ 146          
+ 147          static void pulseWrite(u8 dataC){
+ 148   1          PCF8574_Write(dataC | LCD_ENABLE);
+ 149   1          DelayXus(1);
+ 150   1          PCF8574_Write(dataC & ~LCD_ENABLE);
+ 151   1      
+ 152   1      }
+ 153          
+ 154          static void write4bit(u8 dataC){
+ 155   1          PCF8574_Write(dataC);
+ 156   1          pulseWrite(dataC);
+ 157   1      }
+ 158          
+ 159          static void send(u8 dataC, u8 mode){
+ 160   1          u8 highNibble = dataC & 0xF0; 
+ 161   1          u8 lowNibble = (dataC << 4) & 0xF0;
+ 162   1          write4bit((highNibble) | mode);
+ 163   1          write4bit((lowNibble) | mode);
+ 164   1      }
+ 165          
+ 166          static void command(u8 dataC){
+ 167   1          send(dataC,0);
+ 168   1          DelayXus(37); //KEEP THIS DELAY OR SOME COMMANDS FAIL TO FINISH QUICK AND CAN BORK THE OUTPUT COMPLETELY
+ 169   1          //nah id win  
+ 170   1        //future me update : no i didnt win, had to revert. alaways consider edge cases 
+ 171   1      } 
+C51 COMPILER V9.60.7.0   LCD_I2C                                                           04/02/2026 17:27:47 PAGE 4   
+
+ 172          static void write(u8 dataC){
+ 173   1          send(dataC,1);
+ 174   1          DelayXus(41); 
+ 175   1      }
+ 176          static void lcd_init(u8 addr, u8 backlight){
+ 177   1          
+ 178   1        lcd._backlight = backlight ? LCD_BACKLIGHT : LCD_NOBACKLIGHT;
+ 179   1        lcd._addr = addr << 1; //i2c uses 7 bits for address 
+ 180   1        PCF8574_Write(lcd._backlight);
+ 181   1        DelayXms(10);
+ 182   1        
+ 183   1        //starting generator
+ 184   1        write4bit(0x30); DelayXus(150); //first pull
+ 185   1        write4bit(0x30); DelayXus(150); //second pull
+ 186   1        write4bit(0x30); DelayXus(150); //third pull
+ 187   1        
+ 188   1        write4bit(0x20); //pressing power button
+ 189   1        //generator on!
+ 190   1      
+ 191   1        DelayXus(150);
+ 192   1        command(0x28);  //4 BIT MODE, 2 LINE, 5X8 DOTS 
+ 193   1        lcd._displayctrl = LCD_DISPLAYCONTROL | LCD_DISPLAYON | LCD_CURSOROFF | LCD_BLINKOFF; 
+ 194   1        command(0x0c);  //display on, cursor off, blink off
+ 195   1        command(LCD_CLEARDISPLAY);
+ 196   1        DelayXms(2); //clearing takes time 
+ 197   1        lcd._displaymode = LCD_ENTRYMODESET| LCD_ENTRYLEFT | LCD_ENTRYSHIFTDECREMENT;
+ 198   1        
+ 199   1        command(LCD_SETDDRAMADDR);  
+ 200   1        
+ 201   1      }
+ 202          static void writeHello(){
+ 203   1        write('H');
+ 204   1        write('e');
+ 205   1        write('l');
+ 206   1        write('l');
+ 207   1        write('o');
+ 208   1      }
+ 209          
+ 210          
+ 211          //high lvl functions
+ 212          
+ 213          static void clearCommand(){
+ 214   1        command(LCD_CLEARDISPLAY); 
+ 215   1        DelayXms(2);  
+ 216   1      }
+ 217          
+ 218          static void home(){   command(LCD_RETURNHOME);  DelayXms(2);}
+ 219          static void setCursor(u8 row,u8 col){   
+ 220   1        u16 rowoff[] = {0x00,0x40};
+ 221   1        command(LCD_SETDDRAMADDR | (col+rowoff[row-1]-1)); // -1 because array start from 0 but row & col start f
+             -rom 1
+ 222   1      }
+ 223          static void backlight(){
+ 224   1          lcd._backlight = LCD_BACKLIGHT;
+ 225   1          PCF8574_Write(0);
+ 226   1      }
+ 227          static void noBacklight(){
+ 228   1          lcd._backlight = LCD_NOBACKLIGHT;
+ 229   1          PCF8574_Write(0);
+ 230   1      }
+ 231          static void displayOn(){
+ 232   1          lcd._displayctrl |= LCD_DISPLAYON;
+C51 COMPILER V9.60.7.0   LCD_I2C                                                           04/02/2026 17:27:47 PAGE 5   
+
+ 233   1          command(lcd._displayctrl);
+ 234   1      }
+ 235          static void displayOff(){
+ 236   1          lcd._displayctrl &= ~LCD_DISPLAYON;
+ 237   1          command(lcd._displayctrl);
+ 238   1      }
+ 239          static void cursor() {
+ 240   1          lcd._displayctrl |= LCD_CURSORON;
+ 241   1          command(lcd._displayctrl);
+ 242   1      }
+ 243          static void noCursor() {
+ 244   1          lcd._displayctrl &= ~LCD_CURSORON;
+ 245   1          command(lcd._displayctrl);
+ 246   1      }
+ 247          static void noBlink() {
+ 248   1          lcd._displayctrl &= ~LCD_BLINKON;
+ 249   1          command(lcd._displayctrl);
+ 250   1      }
+ 251          static void blink() {
+ 252   1          lcd._displayctrl |= LCD_BLINKON;
+ 253   1          command(lcd._displayctrl);
+ 254   1      }
+ 255          static void leftToRight(){
+ 256   1          lcd._displaymode |= LCD_ENTRYLEFT;
+ 257   1          command(lcd._displaymode);
+ 258   1      }
+ 259          static void rightToLeft(){
+ 260   1          lcd._displaymode &= ~LCD_ENTRYLEFT;
+ 261   1          command(lcd._displaymode);
+ 262   1      }
+ 263          static void autoscroll(){
+ 264   1          lcd._displaymode |= LCD_ENTRYSHIFTINCREMENT;
+ 265   1          command(lcd._displaymode);
+ 266   1      }
+ 267          static void noautoscroll(){
+ 268   1          lcd._displaymode &= ~LCD_ENTRYSHIFTINCREMENT;
+ 269   1          command(lcd._displaymode);
+ 270   1      }
+ 271          static void printstr(char *str){
+ 272   1        //u8 len = 1;
+ 273   1          while(*str){
+ 274   2            //if(len==16) setCursor(2,1);
+ 275   2            write(*str++);
+ 276   2            //len++;
+ 277   2          }
+ 278   1      }
+ 279          
+ 280          static void clear(){
+ 281   1        setCursor(1,1);
+ 282   1        printstr("                ");
+ 283   1        setCursor(2,1);
+ 284   1        printstr("                ");
+ 285   1        setCursor(1,1);
+ 286   1        
+ 287   1      }
+ 288          
+ 289          
+ 290          static void printInt(long n){
+ 291   1      //    char str[11]; u8 t; u8 i = 0;
+ 292   1      //    
+ 293   1      //    if(n==0){ write('0'); return;}
+ 294   1      //    if(n<10){ str[1]= '0';}
+C51 COMPILER V9.60.7.0   LCD_I2C                                                           04/02/2026 17:27:47 PAGE 6   
+
+ 295   1      //    while(n>0){
+ 296   1      //      t = n%10;
+ 297   1      //      str[i++] = (u8)(t+'0');
+ 298   1      //      n/=10;
+ 299   1      //    }
+ 300   1      //    //printstr(str);
+ 301   1      //    while (i >0) {
+ 302   1      //        write(str[--i]);
+ 303   1      //        DelayXms(1);  // Delay for stability, adjust as needed
+ 304   1      //    }
+ 305   1        
+ 306   1        //new method
+ 307   1        char buff[8*sizeof(n)+1];
+ 308   1        char *i = &buff[sizeof(buff)-1];   //pointer to last member of array, so it iterates from last which corr
+             -elates to our while loop starting from the last number
+ 309   1        if(n==0){ write('0'); return; }
+ 310   1        if(n<0){ 
+ 311   2          write('-');
+ 312   2          n = -n;
+ 313   2        }
+ 314   1        *i='\0';
+ 315   1        do{
+ 316   2          char c = n%10;
+ 317   2          n=n/10;
+ 318   2          *--i = c+'0';  //adding ascii code of 0 as our starting ascii value for numbers 0-9, so for 0 => 0 + '0'
+             - = 48, then 1 = 1+'0' = 49 and so on 
+ 319   2        } while(n);
+ 320   1        printstr(i);
+ 321   1          
+ 322   1      }
+ 323          
+ 324          
+ 325          //include user functions 
+ 326          typedef struct {
+ 327              void (*init)(u8 addr,u8 backlight);
+ 328              void (*Hello)(void);
+ 329              void (*clear)(void);
+ 330              void (*home)(void);
+ 331              void (*setCursor)(u8 row,u8 column);
+ 332              void (*backlight)(void);
+ 333              void (*noBacklight)(void);
+ 334              void (*displayOn)(void);
+ 335              void (*displayOff)(void);
+ 336              void (*cursor)(void);
+ 337              void (*noCursor)(void);
+ 338              void (*blink)(void);
+ 339              void (*noBlink)(void);
+ 340              void (*leftToRight)(void);
+ 341              void (*rightToLeft)(void);
+ 342              void (*autoscroll)(void);
+ 343              void (*noAutoscroll)(void);
+ 344              void (*printstr)(char* str);
+ 345              void (*write)(u8 chara);
+ 346              void (*printInt)(u32 n);
+ 347              void (*clearCommand)(void);
+ 348          
+ 349          } I2C_LCD;
+ 350          
+ 351          const I2C_LCD LCD = {
+ 352          //    .init = init,
+ 353          //    .Hello = writeHello //designated initializer not supported in this compiler, use positional initialize
+             -r. just like in formal param list in java
+C51 COMPILER V9.60.7.0   LCD_I2C                                                           04/02/2026 17:27:47 PAGE 7   
+
+ 354                                    // in python it supports message = "Hello" which is designated initializer 
+ 355                lcd_init,writeHello,clear,home,setCursor,backlight,noBacklight,displayOn,displayOff,cursor,noCursor,bli
+             -nk,noBlink,leftToRight,rightToLeft,autoscroll,noautoscroll,printstr,write,printInt
+ 356          };
+ 357          
+ 358          
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)

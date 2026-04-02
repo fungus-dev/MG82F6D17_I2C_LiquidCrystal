@@ -1,0 +1,64 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              04/02/2026 18:29:58 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main.c LARGE OPTIMIZE(0,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listing
+                    -s\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          
+   2          #define MCU_SYSCLK       24000000
+   3          #define MCU_CPUCLK       MCU_SYSCLK
+   4          
+   5          #include <Intrins.h>
+   6          #include ".\include\API_Macro_MG82F6D17.H"
+   7          #include ".\include\REG_MG82F6D17.H"
+   8          #include ".\include\Delay.h"  
+   9          #include ".\include\CLKCONF.H"
+  10          #include ".\include\TYPE.h"
+  11          #include <stdlib.h>
+  12          
+  13          #include ".\include\LCD_I2C.c"
+  14          
+  15          
+  16          
+  17          
+  18          void InitTWI0(void) {
+  19   1          TWI0_Clear();
+  20   1          TWI0_SetClock(TWI0_CLK_SYSCLK_64);  
+  21   1          TWI0_SetUseP60P61(); // Set to P60 (SCL) and P61 (SDA)
+  22   1          TWI0_Enable();
+  23   1      }
+  24          
+  25          void initSystem(){
+  26   1        InitClock();
+  27   1        InitTWI0();
+  28   1      }
+  29          
+  30          int main(){
+  31   1        initSystem();
+  32   1        LCD.init(0x27,1);
+  33   1        LCD.clear();
+  34   1        LCD.printstr("Hello");
+  35   1        
+  36   1        
+  37   1        while(true){    
+  38   2        }
+  39   1      }
+  40          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1555    ----
+   CONSTANT SIZE    =     10    ----
+   XDATA SIZE       =    142    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
